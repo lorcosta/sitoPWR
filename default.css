@@ -1,0 +1,109 @@
+/*definite le aree, le tipologie*/
+.theMenu{grid-area: menu;background-color: white;color:black;}
+.theMain{grid-area: main;padding-left: 2rem;color:white;}
+.theHeaderLeft{grid-area: header-left;text-align: left;background-color: white;max-width:auto}
+.theHeader{grid-area: header; border: none;text-align: center;font-weight: bold;font-size: 2rem;}
+.theHeaderRight{grid-area: header-right;text-align: center;max-width:auto;color: white}
+.theFooterLeft{grid-area: footer-left; border-top: none;font-family:Times, Georgia, serif;font-style: italic; font-size: 0.8rem;background-color: white;color: black;}
+.theFooter{grid-area: footer; border-top: none;font-family:Times, Georgia, serif;font-style: italic; font-size: 0.8rem;padding-left: 2rem;}
+.theFooterRight{grid-area: footer-right; border-top: none;font-family:Times, Georgia, serif;font-style: italic;font-size: 0.8rem;}
+/*definita la griglia*/
+.grid-container{
+  display: grid;
+  grid-template-areas:
+  'header-left header header header header header header header header header header header-right'
+  'menu main main main main main main main main main main main'
+  'footer-left footer footer footer footer footer footer footer footer footer footer footer-right'
+}
+.theMenu a:link{
+  color: black;
+}/*link neri su bianco*/
+.theMenu a:visited{
+  color:black;
+}/*anche se visitati ritornano neri*/
+.theMenu a:hover{
+  color: white;
+  background-color: black;
+}/*Con il mouse su un link vengono invertiti i colori*/
+.theMenu a:active{
+  color:black;
+  background-color:#70AE6E;
+}
+.theMain a:link,.theFooter a:link{
+  color: white;
+}/*link bianco su nero*/
+.theMain a:visited,.theFooter a:visited{
+  color:white;
+}/*anche se visitati ritornano bianchi*/
+.theMain a:hover,.theFooter a:hover{
+  color: black;
+  background-color: white;
+}/*Con il mouse su un link vengono invertiti i colori*/
+.theMain a:active,.theFooter a:active{
+  color:black;
+  background-color:#70AE6E;
+}
+
+ul{
+  list-style-type: none;
+}
+.wrapper {/*per centrare un'immagine*/
+  display: block;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+.citazione{
+  font-family:cursive;
+  text-align: center;
+}
+.autore{
+  font-style: normal;
+  font-size: 0.7rem;
+  text-align: center;
+}
+.social{
+  text-align: left;
+  width: 100%;
+}
+
+
+@media print{
+  body{
+    font-family: Times,serif;
+    font-size: 12pt;
+    color: black;
+    background: none;
+  }
+  a{
+    text-decoration: underline;
+  }
+  a::after{
+    content: "(" attr(href) ")";
+  }
+  footer::after{
+    content: "Copyright Lorenzo Costa";
+  }
+  .theMenu{display: none;}
+}
+body{
+  color:white;
+  font-family:Helvetica,Verdana, sans-serif;/*verificare che siano adatti per la stampa*/
+  line-height: 110%;
+  background: black scroll center center repeat;
+}
+footer{
+  font-family: Times, Georgia, serif;/*verificare che siano adatti per la stampa*/
+  font-style: italic;
+  font-size: 0.8rem;
+}
+@media only screen and (max-width:768px) {
+  .grid-container{
+    display: grid;
+    grid-template-areas:
+    'header header'
+    'menu menu'
+    'main main'
+    'footer-1 footer-3'
+  }
+}
