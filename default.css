@@ -1,19 +1,22 @@
 /*definite le aree, le tipologie*/
 .theMenu{grid-area: menu;background-color: white;color:black;}
 .theMain{grid-area: main;padding-left: 2rem;color:white;}
-.theHeaderLeft{grid-area: header-left;text-align: left;background-color: white;max-width:auto}
+.theHeaderLeft{grid-area: header-left;text-align: left;background-color: white;}
 .theHeader{grid-area: header; border: none;text-align: center;font-weight: bold;font-size: 2rem;}
-.theHeaderRight{grid-area: header-right;text-align: center;max-width:auto;color: white}
-.theFooterLeft{grid-area: footer-left; border-top: none;font-family:Times, Georgia, serif;font-style: italic; font-size: 0.8rem;background-color: white;color: black;}
-.theFooter{grid-area: footer; border-top: none;font-family:Times, Georgia, serif;font-style: italic; font-size: 0.8rem;padding-left: 2rem;}
-.theFooterRight{grid-area: footer-right; border-top: none;font-family:Times, Georgia, serif;font-style: italic;font-size: 0.8rem;}
+.theHeaderRight{grid-area: header-right;text-align: center;color: white}
+.theFooterLeft{grid-area: footer-left; font-family:Times, Georgia, serif;font-style: italic; font-size: 0.8rem;
+                background-color: white;color: black;text-align: center;}
+.theFooter{grid-area: footer;font-family:Times, Georgia, serif;font-style: italic; font-size: 0.8rem;padding-left: 2rem;}
+.theFooterRight{grid-area: footer-right; font-family:Times, Georgia, serif;font-style: italic;font-size: 0.8rem;width: max-content;}
 /*definita la griglia*/
 .grid-container{
   display: grid;
+  min-height: 100%;
   grid-template-areas:
   'header-left header header header header header header header header header header header-right'
   'menu main main main main main main main main main main main'
-  'footer-left footer footer footer footer footer footer footer footer footer footer footer-right'
+  'footer-left footer footer footer footer footer footer footer footer footer footer footer-right';
+
 }
 .theMenu a:link{
   color: black;
@@ -43,15 +46,29 @@
   color:black;
   background-color:#70AE6E;
 }
-
+body{
+  color:white;
+  font-family:Helvetica,Verdana, sans-serif;/*verificare che siano adatti per il body*/
+  background: black scroll center center repeat;
+}
 ul{
-  list-style-type: none;
+  list-style-type: none;/*toglie i pallini dalla lista del theMenu*/
+}
+.social{
+  text-align: left;
 }
 .wrapper {/*per centrare un'immagine*/
   display: block;
   margin: auto;
-  text-align: center;
-  width: 100%;
+  text-align: left;
+  width: 60%;
+}
+.theMain>.wrapper{/*Sposta le immagini nel main a sinistra e spazia le scritte di 1 rem*/
+  float: left;
+  padding-right: 1rem;
+}
+.theMain>p{
+  font-size: 1.3rem;
 }
 .citazione{
   font-family:cursive;
@@ -62,12 +79,7 @@ ul{
   font-size: 0.7rem;
   text-align: center;
 }
-.social{
-  text-align: left;
-  width: 100%;
-}
-
-
+/*Media query stampa e schermi piccoli*/
 @media print{
   body{
     font-family: Times,serif;
@@ -85,17 +97,6 @@ ul{
     content: "Copyright Lorenzo Costa";
   }
   .theMenu{display: none;}
-}
-body{
-  color:white;
-  font-family:Helvetica,Verdana, sans-serif;/*verificare che siano adatti per la stampa*/
-  line-height: 110%;
-  background: black scroll center center repeat;
-}
-footer{
-  font-family: Times, Georgia, serif;/*verificare che siano adatti per la stampa*/
-  font-style: italic;
-  font-size: 0.8rem;
 }
 @media only screen and (max-width:768px) {
   .grid-container{

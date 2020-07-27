@@ -41,11 +41,13 @@
         <?php menu(); ?>
       </div>
       <div class="theMain">
-        <p>Benvenuto in MONEY TRANSFER! Questa piattaforma ti permetterà di inviare e ricevere
-            denaro in modo totalmente sicuro. <br>
-            Se non sei ancora registrato accedi subito alla pagina di <a href="login.php">LOGIN</a>
-            e inserisci le tue credenziali, potrai accedere a tutte
-            le nostre funzionalit&agrave. </p>
+        <h2>Benvenuto in MONEY TRANSFER! Questa piattaforma ti permetterà di inviare e ricevere
+            denaro in modo totalmente sicuro.</h2>
+        <img class="wrapper" src="img/e-wallet.jpg" alt="Pagamenti digitali">
+        <p>Se non sei ancora registrato accedi subito alla pagina di <a href="login.php">LOGIN</a>
+        e inserisci le tue credenziali, potrai accedere a tutte le funzionalit&agrave offerte. <br>
+        Se sei un utente puoi effettuare pagamenti verso i negozianti, se invece sei un negozio
+        puoi effettuare pagamenti verso chiunque.</p>
       </div>
       <div class="theFooterLeft">
         <?php footerLeft(); ?>
