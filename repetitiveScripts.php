@@ -21,7 +21,7 @@ function avvisoJS(){
      non sar&agrave; disponibile.</noscript>';
 }
 function myHeaderLeft(){
-  echo '<img src="img/logo.jpg" alt="Logo: Money Transfer">';
+  echo '<a href="home.php"><img src="img/logo.jpg" alt="Logo: Money Transfer"></a>';
 }
 function myHeader(){
   echo '<p>';
@@ -42,7 +42,8 @@ function menu(){
   echo '  </ul>';
 }
 function footerLeft(){
-  echo '<p>Ti trovi sulla pagina: '.basename($_SERVER['PHP_SELF']).'</p>';//Given a string containing the path to a file or directory, this function will return the trailing name component.
+  echo '<p class="wrapperText">Ti trovi sulla pagina: '.basename($_SERVER['PHP_SELF']).'</p>';//Given a string containing the path to a file or directory, this function will return the trailing name component.
+
 }
 function footer(){
   global $author;//per rendere visibile la variabile all'interno della function

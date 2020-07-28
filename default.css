@@ -1,17 +1,17 @@
 /*definite le aree, le tipologie*/
 .theMenu{grid-area: menu;background-color: white;color:black;}
-.theMain{grid-area: main;padding-left: 2rem;color:white;}
+.theMain{grid-area: main;padding-left: 2rem;padding-right: 2rem;color:white;}
 .theHeaderLeft{grid-area: header-left;text-align: left;background-color: white;}
 .theHeader{grid-area: header; border: none;text-align: center;font-weight: bold;font-size: 2rem;}
 .theHeaderRight{grid-area: header-right;text-align: center;color: white}
 .theFooterLeft{grid-area: footer-left; font-family:Times, Georgia, serif;font-style: italic; font-size: 0.8rem;
-                background-color: white;color: black;text-align: center;}
-.theFooter{grid-area: footer;font-family:Times, Georgia, serif;font-style: italic; font-size: 0.8rem;padding-left: 2rem;}
-.theFooterRight{grid-area: footer-right; font-family:Times, Georgia, serif;font-style: italic;font-size: 0.8rem;width: max-content;}
+                background-color: white;color: black;text-align: center;display: grid;align-items: end;}
+.theFooter{grid-area: footer;font-family:Times, Georgia, serif;font-style: italic; font-size: 0.8rem;padding-left: 2rem;align-self: end;}
+.theFooterRight{grid-area: footer-right;width: max-content;align-self: end;}
 /*definita la griglia*/
 .grid-container{
   display: grid;
-  min-height: 100%;
+  min-height: 100vh;
   grid-template-areas:
   'header-left header header header header header header header header header header header-right'
   'menu main main main main main main main main main main main'
@@ -54,8 +54,9 @@ body{
 ul{
   list-style-type: none;/*toglie i pallini dalla lista del theMenu*/
 }
-.social{
-  text-align: left;
+.social>img{
+  max-width: 2%;
+  border-radius: 0.8rem;
 }
 .wrapper {/*per centrare un'immagine*/
   display: block;
@@ -69,6 +70,28 @@ ul{
 }
 .theMain>p{
   font-size: 1.3rem;
+}
+.bottoni{
+  padding-top: 2rem;
+}
+input[type=submit], input[type=reset]{
+  border-radius: 0.8rem;
+  border: 0.1rem;
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.bottoni input[type=submit]:hover{
+  background: green;
+}
+.bottoni input[type=reset]:hover{
+  background: red;
+}
+input[type=text], input[type=password]{
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: 0;
+  font-size: 1.5rem;
 }
 .citazione{
   font-family:cursive;
