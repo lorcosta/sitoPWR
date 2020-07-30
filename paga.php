@@ -23,7 +23,7 @@
   “http://www.w3.org/TR/html4/strict.dtd">
 <html lang='it'>
   <head>
-    <?php intestazioni('LOGIN') ?>
+    <?php intestazioni('PAGA') ?>
     <link rel="prev" href="home.php">
     <link rel="next" href="validaLogin.php">
   </head>
@@ -42,22 +42,7 @@
         <?php menu(); ?>
       </div>
       <div class="theMain">
-        <form action="validaLogin.php" method="post">
-          <p>Username:</p>
-          <div class="social">
-            <img src="img/utente.png" alt="Icona utente">
-            <input type="text" name="user" placeholder="Inserisci qui il tuo username" size="30">
-          </div>
-          <p>Password:</p>
-          <div class="social">
-            <img src="img/password.png" alt="Icona utente">
-            <input type="password" name="password" placeholder="Inserisci qui la tua password" size="30">
-          </div>
-          <div class="bottoni">
-            <input type="submit" name="ok" value="OK">
-            <input type="reset" name="reset" value="PULISCI">
-          </div>
-        </form>
+
       </div>
       <div class="theFooterLeft">
         <?php footerLeft(); ?>
