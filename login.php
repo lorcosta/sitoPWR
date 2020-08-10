@@ -16,6 +16,9 @@
     if(!isset($_SESSION["logged"])){
       $_SESSION["logged"]=false;
     }
+    if($_SESSION["logged"]==true){
+        header('Location:paga.php');
+    }
   }
   require_once "repetitiveScripts.php";//require per includere il file e scatenare eccezione fatale nel caso non venga incluso, once controlla che venga incluso una sola volta
  ?>
@@ -42,11 +45,15 @@
         <?php menu(); ?>
       </div>
       <div class="theMain">
-        <form action="validaLogin.php" method="post">
+        <form action="validaLogin.php" method="get">
           <p>Username:</p>
           <div class="social">
             <img src="img/utente.png" alt="Icona utente">
-            <input type="text" name="user" placeholder="Inserisci qui il tuo username" size="30">
+            <?php if(isset($_COOKIE["login_username"])){
+              echo '<input type="text" name="user" value="'.$_COOKIE["login_username"].'" size="30">';
+            }else{
+              echo '<input type="text" name="user" placeholder="Inserisci qui il tuo username" size="30">';
+            } ?>
           </div>
           <p>Password:</p>
           <div class="social">
@@ -54,6 +61,7 @@
             <input type="password" name="password" placeholder="Inserisci qui la tua password" size="30">
           </div>
           <div class="bottoni">
+            //controllare tramite javascript che non vengano lasciati vuoti i campi del form
             <input type="submit" name="ok" value="OK">
             <input type="reset" name="reset" value="PULISCI">
           </div>
