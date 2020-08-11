@@ -54,10 +54,24 @@ body{
 ul{
   list-style-type: none;/*toglie i pallini dalla lista del theMenu*/
 }
-.err{
+caption{
+  font-weight: bold;
+  text-align: center;
+}
+table,tr,th{
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.3rem;
+}
+.err{/*in caso di errori*/
   text-align:center;
   font-weight:bold;
   color:red;
+}
+.succ{/*in caso di successo*/
+  text-align:center;
+  font-weight:bold;
+  color:green;
 }
 .social>img{
   max-width: 2%;

@@ -29,6 +29,7 @@
     <?php intestazioni('LOGIN') ?>
     <link rel="prev" href="home.php">
     <link rel="next" href="validaLogin.php">
+    <script type="text/javascript" src="usefulJS.js"></script>
   </head>
   <body>
     <div class="grid-container">
@@ -45,25 +46,24 @@
         <?php menu(); ?>
       </div>
       <div class="theMain">
-        <form action="validaLogin.php" method="get">
+        <form id="formLogin" action="validaLogin.php" method="POST">
           <p>Username:</p>
           <div class="social">
             <img src="img/utente.png" alt="Icona utente">
             <?php if(isset($_COOKIE["login_username"])){
-              echo '<input type="text" name="user" value="'.$_COOKIE["login_username"].'" size="30">';
+              echo '<input type="text" id="user" name="user" value="'.$_COOKIE["login_username"].'" size="30" onchange="checkLogin(\'formLogin\',\'user\')">';
             }else{
-              echo '<input type="text" name="user" placeholder="Inserisci qui il tuo username" size="30">';
+              echo '<input type="text" id="user" name="user" placeholder="Inserisci qui il tuo username" size="30" onchange="checkLogin(\'formLogin\',\'user\')">';
             } ?>
           </div>
           <p>Password:</p>
           <div class="social">
             <img src="img/password.png" alt="Icona utente">
-            <input type="password" name="password" placeholder="Inserisci qui la tua password" size="30">
+            <input type="password" id="password" name="password" placeholder="Inserisci qui la tua password" size="30" onchange="checkLogin('formLogin','password')">
           </div>
           <div class="bottoni">
-            //controllare tramite javascript che non vengano lasciati vuoti i campi del form
             <input type="submit" name="ok" value="OK">
-            <input type="reset" name="reset" value="PULISCI">
+            <input type="reset" name="reset" value="PULISCI" onclick="cleanForm('formLogin','user','password')">
           </div>
         </form>
       </div>

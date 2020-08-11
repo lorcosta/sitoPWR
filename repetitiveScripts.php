@@ -9,6 +9,7 @@ function intestazioni($title){
   echo '<meta name="keywords" lang="IT" content="pagamenti">';
   echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
   echo '<meta http-equiv="cache-control" content="no-cache">';//non permetto caching delle pagine visto che sono dinamiche
+  avvisoJS();
   echo '<title>'.$title.'</title>';
   //aggiungere in ogni singola pagina la consultazione logica del sito web
   //<link rel="prev" href="previous.php">
@@ -35,14 +36,22 @@ function myHeaderRight(){
 function menu(){
   echo '  <ul id="menu">';
   echo '    <li><a href="home.php">HOME</a></li>';
-  echo '    <li><a href="login.php">LOGIN</a></li>';
+  if($_SESSION["logged"]==false){
+    echo '    <li><a href="login.php">LOGIN</a></li>';
+  }else{
+    echo '    <li><a href="javascript:void(0);">LOGIN</a></li>';// this will maintain your css for link like others but when you click it won't redirect.
+  }
   echo '    <li><a href="paga.php">PAGA</a></li>';
   echo '    <li><a href="log.php">LOG</a></li>';
-  echo '    <li><a href="logout.php">LOGOUT</a></li>';
+  if($_SESSION["logged"]==true){
+    echo '    <li><a href="logout.php">LOGOUT</a></li>';
+  }else{
+    echo '    <li><a href="javascript:void(0);">LOGOUT</a></li>';
+  }
   echo '  </ul>';
 }
 function footerLeft(){
-  echo '<p class="wrapperText">Ti trovi sulla pagina: '.basename($_SERVER['PHP_SELF']).'</p>';//Given a string containing the path to a file or directory, this function will return the trailing name component.
+  echo '<p>Ti trovi sulla pagina: '.basename($_SERVER['PHP_SELF']).'</p>';//Given a string containing the path to a file or directory, this function will return the trailing name component.
 
 }
 function footer(){

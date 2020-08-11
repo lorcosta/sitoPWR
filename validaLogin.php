@@ -46,7 +46,13 @@
       </div>
       <div class="theMain">
         <?php
-        if($session){
+        if(empty($_REQUEST['user'])){
+          //utente vuoto
+          echo '<p class="err">ATTENZIONE! Nessun username inserito per il login.</p>';
+        }elseif(empty($_REQUEST['password'])){
+          //password vuota
+          echo '<p class="err">ATTENZIONE! Nessuna password inserita per il login.</p>';
+        }elseif($session){
           $con=mysqli_connect('172.17.0.60','uReadOnly','posso_solo_leggere','pagamenti');
           if(isset($_REQUEST['user']) && isset($_REQUEST['password'])){
             if (mysqli_connect_errno()){
@@ -67,7 +73,6 @@
                   mysqli_stmt_execute($stmt);//chiamo di nuovo l'execute
                   mysqli_stmt_bind_result($stmt,$saldo);
                   mysqli_stmt_fetch($stmt);
-                  echo '<script>console.log("'.$saldo.'")</script>';
                   $_SESSION["logged"]=true;
                   $_SESSION["user"]=$_REQUEST['user'];
                   $_SESSION["saldo"]=intval($saldo);
@@ -80,10 +85,10 @@
                   $name="login_username";
                   $value=$_REQUEST['user'];
                   $expires=time()+(86400*5);//5 giorni, 86400 secondi al giorno
-                  //echo '<script>console.log("expiration date:'.gmdate(DATE_COOKIE,$expires).' and username: '.$_REQUEST['user'].'");</script>';//rimuovere
-                  //TODO decidere cosa fare per i flag opzionali
                   $path="/";
-                  echo '<script>document.cookie="'.$name.'='.$value.';expires='.$expires.';path='.$path.'";</script>';
+                  $domain="http://195.231.2.153:29739";
+                  $secure=true;
+                  echo '<script>document.cookie="'.$name.'='.$value.';expires='.gmdate(DATE_COOKIE,$expires).';path='.$path.'"</script>';
                   echo '<script>window.location.href="paga.php";</script>';//redirect a paga.php
                 }
                 mysqli_stmt_close($stmt);//chiudo la connessione
@@ -105,63 +110,6 @@
         }else {
            echo "<br><p class=\"error\">Errore!</p> <p>Le sessioni sono disabilitate.</p>";
            echo "<br><br>\n<p>Torna <a href=\"login.php\">indietro</a>.</p>";
-        }
-        //TODO controlli sui valori passati che sonon da immettere nel database
-        $con=mysqli_connect('172.17.0.60','uReadOnly','posso_solo_leggere','pagamenti');
-        if(isset($_REQUEST['user']) && isset($_REQUEST['password'])){
-          if (mysqli_connect_errno()){
-            printf('<p class="err">Errore: connessione al database fallita. %s</p>',mysqli_connect_error());
-          }
-          $query="SELECT `saldo` FROM `usr` WHERE `nick`=? AND `pwd`=?";
-          if($stmt=mysqli_prepare($con,$query)){
-            mysqli_stmt_bind_param($stmt,"ss",$_REQUEST['user'],$_REQUEST['password']);//associo a ? l'user e la password
-            if(mysqli_stmt_execute($stmt)==TRUE){//eseguo lo statement
-              //esecuzione senza errori
-              //controllo sul risultato, se c'è una riga allora tutto a posto
-              if(mysqli_num_rows(mysqli_stmt_get_result($stmt))==0){
-                //il login non corrisponde a nessuno Username
-                die('<p class="err">ERRORE! I dati inseriti non corrispondono ad un utente registrato</p><p class="err">Ritorna alla pagina di <a href="login.php">LOGIN</a></p>');
-              }else{
-                //utente loggato con successo
-                //memorizzo nella sessione username e saldo
-                mysqli_stmt_execute($stmt);//chiamo di nuovo l'execute
-                mysqli_stmt_bind_result($stmt,$saldo);
-                mysqli_stmt_fetch($stmt);
-                echo '<script>console.log("'.$saldo.'")</script>';
-                $_SESSION["logged"]=true;
-                $_SESSION["user"]=$_REQUEST['user'];
-                $_SESSION["saldo"]=intval($saldo);
-                //chiudo la connessione
-                mysqli_stmt_close($stmt);
-                if(!mysqli_close($con)){
-                  printf('<p class="err">Errore di chiusura della connessione, impossibile rilasciare le risorse.</p>');
-                }
-                //creo il cookie per tenere memorizzato l'username con expiration fra 5 giorni
-                $name="login_username";
-                $value=$_REQUEST['user'];
-                $expires=time()+(86400*5);//5 giorni, 86400 secondi al giorno
-                //echo '<script>console.log("expiration date:'.gmdate(DATE_COOKIE,$expires).' and username: '.$_REQUEST['user'].'");</script>';//rimuovere
-                //TODO decidere cosa fare per i flag opzionali
-                $path="/";
-                echo '<script>document.cookie="'.$name.'='.$value.';expires='.$expires.';path='.$path.'";</script>';
-                echo '<script>window.location.href="paga.php";</script>';//redirect a paga.php
-              }
-              mysqli_stmt_close($stmt);//chiudo la connessione
-              if(!mysqli_close($con)){
-                printf('<p class="err">Errore di chiusura della connessione, impossibile rilasciare le risorse.</p>');
-              }
-            }else{
-              //errore di esecuzione nella query
-              echo '<p class="err">Errore nell\'esecuzione della query: Error code-->'.mysqli_stmt_errno($stmt).' '.mysqli_stmt_error($stmt).'</p>';
-            }
-          }else{
-            //errore nella preparazione della query
-            echo '<p class="err">Errore nella preparazione della query! Ricarica la pagina di <a href="login.php">LOGIN</a> ed esegui l\'accesso.</p>';
-          }
-        }else{
-          //controlli sui valori passati che sonon da immettere nel database
-          if(!isset($_REQUEST['user'])) echo '<p class="err">ATTENZIONE! Nessun username inserito per il login.</p>';
-          if(!isset($_REQUEST['password'])) echo '<p class="err">ATTENZIONE! Nessuna password inserita per il login.</p>';
         }
          ?>
       </div>
