@@ -24,8 +24,9 @@
 <html lang='it'>
   <head>
     <?php intestazioni('PAGA') ?>
-    <link rel="prev" href="home.php">
-    <link rel="next" href="validaLogin.php">
+    <link rel="prev" href="login.php">
+    <link rel="next" href="elaboraPagamento.php">
+    <script type="text/javascript" src="usefulJS.js"></script>
   </head>
   <body>
     <div class="grid-container">
@@ -81,8 +82,8 @@
               }
 
             }else{
-              echo "<br><p class=\"error\">Errore!</p> <p>Le sessioni sono disabilitate.</p>";
-              echo "<br><br>\n<p>Torna <a href=\"home.php\">indietro</a>.</p>";
+              echo "<p class=\"error\">Errore!</p> <p>Le sessioni sono disabilitate.</p>";
+              echo "<p>Torna <a href=\"home.php\">indietro</a>.</p>";
             }
           }else{
             //utente loggato
@@ -104,25 +105,33 @@
               }
               if($tipologia==0){//utente singolo
                 //faccio una query per selezionare tutti i negozianti
-                $query="SELECT `nome` FROM `usr` WHERE `negozio`=1 ";
+                $query="SELECT `nick`,`nome` FROM `usr` WHERE `negozio`=1 ";
                 $result=mysqli_query($con,$query);
               }elseif($tipologia==1){//negozio
-                $query='SELECT `nome` FROM `usr` WHERE `nick`!=\'' .$_SESSION["user"].'\'';
+                $query='SELECT `nick`,`nome` FROM `usr` WHERE `nick`!=\'' .$_SESSION["user"].'\'';
                 $result=mysqli_query($con,$query);
               }else{
                 //errore generico nella query
                 echo '<p class="err">Errore nell\'esecuzione della query: Error code-->'.mysqli_stmt_errno($stmt).' '.mysqli_stmt_error($stmt).'</p>';
                 //TODO aggiungere un ritorno a home.php tramite repetitiveScripts.php
               }
-              echo '<form id="formPagamento" action="elaboraPagamento.php" method="POST">';
-              echo '<table class="wrapper"><caption>Seleziona un destinatario, immetti l\'importo da trasferire ed esegui la transazione</caption><tr><th>Seleziona un destinatario</th><th>Destinatari</th></tr>';
-              while($row=mysqli_fetch_assoc($result)){
-                echo '<tr><td><input type="radio" name="destinatario"></td><td>'.$row["nome"].'</td></tr>';
+              if($_SESSION["saldo"]>0){
+                echo '<form id="formPagamento" action="elaboraPagamento.php" method="GET">';
+                echo '<table class="wrapper"><caption>Seleziona un destinatario, immetti l\'importo da trasferire ed esegui la transazione</caption><tr><th>Seleziona un destinatario</th><th>Destinatari</th></tr>';
+                while($row=mysqli_fetch_assoc($result)){
+                  echo '<tr><td><input type="radio" name="destinatario" value="'.$row["nick"].'"></td><td>'.$row["nome"].'</td></tr>';
+                }
+                echo '</table>';
+                echo '<div class="numberWrapper"><label for="destinatario">Inserisci la quantità di denaro che vuoi trasferire: </label><input type="number" name="importo" size="15" step="0.01" min="1" max="'.$_SESSION["saldo"].'"> <label for="destinatario">&euro;</label></div>';
+                echo '<div class="numberWrapper"><div class="bottoni"><input type="submit" name="paga" id="paga" value="PROCEDI" > <input type="reset" name="reset" value="PULISCI"></div></div>';
+                echo '</form>';
+              }else{
+                echo '<p class="avviso">Ci dispiace, ma non puoi effettuare pagamenti!</p>';
+                echo '<p class="avviso">Il tuo saldo risulta negativo, attendi di ricevere pagamenti per poter scambiare ulteriore denaro.</p>';
+                echo '<p class="avviso">Se hai da poco ricevuto un pagamento effettua nuovamente il <a href="login.php">login</a> per aggionare il tuo saldo.</p>';
+
               }
-              echo '</table>';
-              echo '</form>';
-              //TODO controllare che vengano effettivamente visualizzati i negozianti o individui corretti in base a chi loggato
-              //TODO aggiungere il campo number per inserire l'importo e il button per inviare il form che richiama elaboraPagamento.php per elaborare pagamento
+
               //chiudo la connessione
               if(!mysqli_close($con)){
                 printf('<p class="err">Errore di chiusura della connessione, impossibile rilasciare le risorse.</p>');

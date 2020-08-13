@@ -63,6 +63,18 @@ table,tr,th{
   padding: 1rem;
   font-size: 1.3rem;
 }
+/*Rimuovono le freccie dagli input type=number*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 .err{/*in caso di errori*/
   text-align:center;
   font-weight:bold;
@@ -86,6 +98,10 @@ table,tr,th{
 .theMain>.wrapper{/*Sposta le immagini nel main a sinistra e spazia le scritte di 1 rem*/
   float: left;
   padding-right: 1rem;
+}
+.numberWrapper{
+  display: block;
+  text-align: center;
 }
 .theMain>p{
   font-size: 1.3rem;
@@ -112,13 +128,9 @@ input[type=text], input[type=password]{
   border: 0;
   font-size: 1.5rem;
 }
-.citazione{
-  font-family:cursive;
-  text-align: center;
-}
-.autore{
+.avviso{
   font-style: normal;
-  font-size: 0.7rem;
+  font-size: 1.3rem;
   text-align: center;
 }
 /*Media query stampa e schermi piccoli*/

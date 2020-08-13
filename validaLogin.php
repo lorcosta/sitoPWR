@@ -17,7 +17,7 @@
       $_SESSION["logged"]=false;
     }
     if($_SESSION["logged"]==true){
-        header('Location:paga.php');
+        header('Location:paga.php');//se arrivo alla pagina di login ma sono già loggato mi riporta a paga.php
     }
   }
   require_once "repetitiveScripts.php";//require per includere il file e scatenare eccezione fatale nel caso non venga incluso, once controlla che venga incluso una sola volta
@@ -75,7 +75,6 @@
                   mysqli_stmt_fetch($stmt);
                   $_SESSION["logged"]=true;
                   $_SESSION["user"]=$_REQUEST['user'];
-                  $_SESSION["saldo"]=intval($saldo);
                   //chiudo la connessione
                   mysqli_stmt_close($stmt);
                   if(!mysqli_close($con)){
@@ -108,8 +107,8 @@
             if(!isset($_REQUEST['password'])) echo '<p class="err">ATTENZIONE! Nessuna password inserita per il login.</p>';
           }
         }else {
-           echo "<br><p class=\"error\">Errore!</p> <p>Le sessioni sono disabilitate.</p>";
-           echo "<br><br>\n<p>Torna <a href=\"login.php\">indietro</a>.</p>";
+           echo "<p class=\"error\">Errore!</p> <p>Le sessioni sono disabilitate.</p>";
+           echo "<p>Torna <a href=\"login.php\">indietro</a>.</p>";
         }
          ?>
       </div>

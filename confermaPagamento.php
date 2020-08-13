@@ -7,10 +7,6 @@
     //effettuare controlli di sessione
   }
   if($session){
-    $_SESSION=array();//svuoto l'array contenente le variabili di sessione
-    $cookie = session_get_cookie_params();//salvo il cookie con i dati per l'username
-    setcookie( session_name(), '' , time()-50000 ,$cookie["path"],$cookie["domain"],$cookie["secure"],$cookie["httponly"]);
-    session_destroy();//distruggo la sessione
     if(!isset($_SESSION["user"])){
       $_SESSION["user"]="ANONIMO";
     }
@@ -20,6 +16,9 @@
     if(!isset($_SESSION["logged"])){
       $_SESSION["logged"]=false;
     }
+    if($_SESSION["logged"]==false){
+        header('Location:login.php');//se arrivo alla pagina di elaborazione pagamento e non sono loggato mi riporta a login.php
+    }
   }
   require_once "repetitiveScripts.php";//require per includere il file e scatenare eccezione fatale nel caso non venga incluso, once controlla che venga incluso una sola volta
  ?>
@@ -27,8 +26,9 @@
   “http://www.w3.org/TR/html4/strict.dtd">
 <html lang='it'>
   <head>
-    <?php intestazioni('LOGOUT') ?>
-    <link rel="prev" href="paga.php">
+    <?php intestazioni('CONFERMA PAGAMENTO') ?>
+    <link rel="prev" href="elaboraPagamento.php">
+    <link rel="next" href="log.php">
   </head>
   <body>
     <div class="grid-container">
@@ -46,14 +46,10 @@
       </div>
       <div class="theMain">
         <?php
-        if($_SESSION["logged"]==false){//ho cambiato lo stato da logged a no logged e quindi posso affermare che tutto ha funzionato
-          echo '<h2 class="succ">Logout avvenuto con successo.</h2>';
-          echo '<p>Per usufruire di tutti i servizi effettua nuovamente il <a href="login.php">login</a>.</p>';
-          echo '<script>window.location.href="home.php";</script>';//ritorno a home, come da specifica
-        }else{
-          echo '<p class="err">Qualcosa è andato storto durante il logout, <a href="logout.php">riprova</a>.</p>';
-        }
-        ?>
+        echo '<h2 class="succ">Pagamento avvenuto con successo.</h2>';
+        echo '<p>Il pagamento è stato effettuato da <i>'.$_SESSION["user"].'</i> ed è stato ricevuto da <i>'.$_SESSION["destinatario"].'</i>.</p>';
+        echo '<p>L\'importo del pagamento &egrave stato di <i>'.$_SESSION["importo"].'</i> &euro; ed &egrave stato registrato in data <i>'.$_SESSION["data"].'</i>.</p>';
+         ?>
       </div>
       <div class="theFooterLeft">
         <?php footerLeft(); ?>

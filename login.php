@@ -17,7 +17,7 @@
       $_SESSION["logged"]=false;
     }
     if($_SESSION["logged"]==true){
-        header('Location:paga.php');
+        header('Location:paga.php');//se arrivo alla pagina di login ma sono già loggato mi riporta a paga.php
     }
   }
   require_once "repetitiveScripts.php";//require per includere il file e scatenare eccezione fatale nel caso non venga incluso, once controlla che venga incluso una sola volta

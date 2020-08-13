@@ -31,6 +31,18 @@ function myHeader(){
 }
 function myHeaderRight(){
   echo 'User: '.strtoupper($_SESSION["user"]);
+  $con=mysqli_connect('172.17.0.60','uReadOnly','posso_solo_leggere','pagamenti');
+  $query="SELECT saldo FROM usr WHERE nick=?";//rimuove $importo da chi effettua il pagamento-->$_SESSION["user"]=$mittente
+  $stmt=mysqli_prepare($con,$query);
+  mysqli_stmt_bind_param($stmt,"s",$_SESSION["user"]);
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_bind_result($stmt,$saldo);
+  mysqli_stmt_fetch($stmt);
+  //rilascio la memoria associata al result set
+  mysqli_stmt_free_result($stmt);
+  mysqli_stmt_close($stmt);
+  $_SESSION["saldo"]=intval($saldo)/100;
+  echo '<script>console.log("'.$_SESSION["saldo"].'");</script>';
   echo '<br>Saldo: '. number_format($_SESSION["saldo"], 2, ',', '') . " &euro;";
 }
 function menu(){
