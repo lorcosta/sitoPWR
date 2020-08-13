@@ -105,9 +105,10 @@
             //se sono arrivato qui i due input sono stati inseriti e sono corretti
             //eseguo il pagamento vero e proprio
             require_once "eseguiPagamento.php";
+            echo '<script>console.log("'.$importo.'")</script>';
             eseguiPagamento($mittente,$destinatario,$importo);
             if(!$_SESSION["error"]){//non sono avvenuti errori perciò posso reindirizzare alla pagina confermaPagamento.php che da le info riassuntive
-              echo '<script>window.location.href="confermaPagamento.php";</script>';
+              //echo '<script>window.location.href="confermaPagamento.php";</script>';
             }
           }else{
             //impossibile arrivare a questo punto perchè se l'utente accede a questa pagina senza essere loggato viene

@@ -106,6 +106,10 @@ input[type=number] {
 .theMain>p{
   font-size: 1.3rem;
 }
+label{
+  font-size: 1.3rem;
+  text-align: center;
+}
 .bottoni{
   padding-top: 2rem;
 }

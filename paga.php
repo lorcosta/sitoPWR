@@ -116,7 +116,7 @@
                 //TODO aggiungere un ritorno a home.php tramite repetitiveScripts.php
               }
               if($_SESSION["saldo"]>0){
-                echo '<form id="formPagamento" action="elaboraPagamento.php" method="GET">';
+                echo '<form id="formPagamento" action="elaboraPagamento.php" method="POST">';
                 echo '<table class="wrapper"><caption>Seleziona un destinatario, immetti l\'importo da trasferire ed esegui la transazione</caption><tr><th>Seleziona un destinatario</th><th>Destinatari</th></tr>';
                 while($row=mysqli_fetch_assoc($result)){
                   echo '<tr><td><input type="radio" name="destinatario" value="'.$row["nick"].'"></td><td>'.$row["nome"].'</td></tr>';
@@ -128,7 +128,6 @@
               }else{
                 echo '<p class="avviso">Ci dispiace, ma non puoi effettuare pagamenti!</p>';
                 echo '<p class="avviso">Il tuo saldo risulta negativo, attendi di ricevere pagamenti per poter scambiare ulteriore denaro.</p>';
-                echo '<p class="avviso">Se hai da poco ricevuto un pagamento effettua nuovamente il <a href="login.php">login</a> per aggionare il tuo saldo.</p>';
 
               }
 
@@ -139,7 +138,7 @@
             }else {
             echo '<p class="err">Attenzione!</p><p>Sessione disabilitata!</p>';
         }
-          }
+      }
          ?>
       </div>
       <div class="theFooterLeft">

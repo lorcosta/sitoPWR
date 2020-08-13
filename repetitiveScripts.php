@@ -18,7 +18,7 @@ function intestazioni($title){
 function avvisoJS(){
   echo '<noscript>Attenzione! questo sito usa JavaScript per l’aggiornamento dei
     dati in tempo reale. Il tuo browser non supporta JavaScript (oppure ne
-    &egrave; stata disabilitata l’esecuzione) e quindi tale funzionalit&agrave
+    &egrave; stata disabilitata l’esecuzione) e quindi tale funzionalit&agrave;
      non sar&agrave; disponibile.</noscript>';
 }
 function myHeaderLeft(){
@@ -42,7 +42,6 @@ function myHeaderRight(){
   mysqli_stmt_free_result($stmt);
   mysqli_stmt_close($stmt);
   $_SESSION["saldo"]=intval($saldo)/100;
-  echo '<script>console.log("'.$_SESSION["saldo"].'");</script>';
   echo '<br>Saldo: '. number_format($_SESSION["saldo"], 2, ',', '') . " &euro;";
 }
 function menu(){

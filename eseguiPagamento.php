@@ -10,7 +10,7 @@ function eseguiPagamento($mittente,$destinatario,$importo){
   //update importo $mittente
   $query="UPDATE `usr` SET `saldo`=(`saldo`-?) WHERE `nick`=?";//rimuove $importo da chi effettua il pagamento-->$_SESSION["user"]=$mittente
   $stmt=mysqli_prepare($con,$query);
-  mysqli_stmt_bind_param($stmt,"is",$importo,$mittente);
+  mysqli_stmt_bind_param($stmt,"is",number_format($importo, 2, '.', ''),$mittente);
   mysqli_stmt_execute($stmt);
   //rilascio la memoria associata al result set
   mysqli_stmt_free_result($stmt);
@@ -19,7 +19,7 @@ function eseguiPagamento($mittente,$destinatario,$importo){
   //eseguo nuovo update importo $destinatario
   $query="UPDATE `usr` SET `saldo`=(`saldo`+?) WHERE `nick`=?";//aggiunge $importo a chi riceve il pagamento-->$destinatario
   $stmt=mysqli_prepare($con,$query);
-  mysqli_stmt_bind_param($stmt,"is",$importo,$destinatario);
+  mysqli_stmt_bind_param($stmt,"is",number_format($importo, 2, '.', ''),$destinatario);
   mysqli_stmt_execute($stmt);
   //rilascio la memoria associata al result set
   mysqli_stmt_close($stmt);
