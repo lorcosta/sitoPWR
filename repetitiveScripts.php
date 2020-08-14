@@ -3,23 +3,21 @@ $author="Lorenzo Costa";
 function intestazioni($title){
   global $author;//per rendere visibile la variabile all'interno della function
   echo '<meta http-equiv="content-type" content="text/html; charset=utf-8">';//w3c raccomanda di inserire l'indicazione del charset entro 1024 byte dall'inizio del documento
-  echo '<link href="default.css" rel="stylesheet" type="text/css">';
+  echo '<link rel="stylesheet" href="default.css" type="text/css" id="stylesheet">';
   echo '<link rel="icon" href="img/favicon.ico" type="image/png">';
   echo '<meta name="Author" content="'.$author.'">';
   echo '<meta name="keywords" lang="IT" content="pagamenti">';
   echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
   echo '<meta http-equiv="cache-control" content="no-cache">';//non permetto caching delle pagine visto che sono dinamiche
-  avvisoJS();
   echo '<title>'.$title.'</title>';
   //aggiungere in ogni singola pagina la consultazione logica del sito web
   //<link rel="prev" href="previous.php">
   //<link rel="next" href="next.php">
 }
 function avvisoJS(){
-  echo '<noscript>Attenzione! questo sito usa JavaScript per l’aggiornamento dei
-    dati in tempo reale. Il tuo browser non supporta JavaScript (oppure ne
-    &egrave; stata disabilitata l’esecuzione) e quindi tale funzionalit&agrave;
-     non sar&agrave; disponibile.</noscript>';
+  echo '<noscript>ATTENZIONE! Questo sito usa JavaScript per l\'aggiornamento dei dati in tempo reale.
+  Il tuo browser non supporta JavaScript (oppure ne è stata disabilitata l\'esecuzione) e quindi tale
+  funzionalità non sarà disponibile.</noscript>';
 }
 function myHeaderLeft(){
   echo '<a href="home.php"><img src="img/logo.jpg" alt="Logo: Money Transfer"></a>';

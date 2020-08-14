@@ -22,8 +22,7 @@
   }
   require_once "repetitiveScripts.php";//require per includere il file e scatenare eccezione fatale nel caso non venga incluso, once controlla che venga incluso una sola volta
  ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//IT"
-  “http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML >
 <html lang='it'>
   <head>
     <?php intestazioni('CONFERMA PAGAMENTO') ?>
@@ -31,6 +30,7 @@
     <link rel="next" href="log.php">
   </head>
   <body>
+    <?php avvisoJS(); ?>
     <div class="grid-container">
       <div class="theHeaderLeft">
         <?php myHeaderLeft(); ?>

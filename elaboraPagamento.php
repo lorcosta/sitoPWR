@@ -22,8 +22,7 @@
   }
   require_once "repetitiveScripts.php";//require per includere il file e scatenare eccezione fatale nel caso non venga incluso, once controlla che venga incluso una sola volta
  ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//IT"
-  “http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML >
 <html lang='it'>
   <head>
     <?php intestazioni('ELABORAZIONE PAGAMENTO') ?>
@@ -31,6 +30,7 @@
     <link rel="next" href="confermaPagamento.php">
   </head>
   <body>
+    <?php avvisoJS(); ?>
     <div class="grid-container">
       <div class="theHeaderLeft">
         <?php myHeaderLeft(); ?>
@@ -105,10 +105,9 @@
             //se sono arrivato qui i due input sono stati inseriti e sono corretti
             //eseguo il pagamento vero e proprio
             require_once "eseguiPagamento.php";
-            echo '<script>console.log("'.$importo.'")</script>';
             eseguiPagamento($mittente,$destinatario,$importo);
             if(!$_SESSION["error"]){//non sono avvenuti errori perciò posso reindirizzare alla pagina confermaPagamento.php che da le info riassuntive
-              //echo '<script>window.location.href="confermaPagamento.php";</script>';
+              echo '<script>window.location.href="confermaPagamento.php";</script>';
             }
           }else{
             //impossibile arrivare a questo punto perchè se l'utente accede a questa pagina senza essere loggato viene

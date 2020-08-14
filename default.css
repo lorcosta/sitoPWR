@@ -140,7 +140,7 @@ input[type=text], input[type=password]{
 /*Media query stampa e schermi piccoli*/
 @media print{
   body{
-    font-family: Times,serif;
+    font-family: Times,Georgia,serif;
     font-size: 12pt;
     color: black;
     background: none;
@@ -151,18 +151,113 @@ input[type=text], input[type=password]{
   a::after{
     content: "(" attr(href) ")";
   }
-  footer::after{
-    content: "Copyright Lorenzo Costa";
+  .theFooter::after{
+    content: "Lorenzo Costa©";
   }
-  .theMenu{display: none;}
+  .theHeader{
+    text-align: center;
+  }
+  .theMenu{
+    display: none;
+  }
+  .succ,.err{
+    text-align:center;
+    font-weight:bold;
+    color:black;
+  }
+  .err::before{
+    content:"ERRORE->"
+  }
 }
+
 @media only screen and (max-width:768px) {
+  .theHeaderLeft{background-color: black;}
+  .theMenu{background-color: black;color: white;}
+  .theFooterLeft{background-color: black;color: white;}
   .grid-container{
     display: grid;
     grid-template-areas:
+    'header-left header header-right'
+    'menu menu menu'
+    'main main main'
+    'footer-left footer footer-right'
+  }
+  .theMenu a:link{
+    color: white;
+  }/*link bianchi su nero*/
+  .theMenu a:visited{
+    color:white;
+  }/*anche se visitati ritornano bianchi*/
+  .theMenu a:hover{
+    color: black;
+    background-color: white;
+  }/*Con il mouse su un link vengono invertiti i colori*/
+  .theMenu a:active{
+    color:black;
+    background-color:#70AE6E;
+  }
+}
+@media only screen and (max-width:550px) {
+  .theHeaderLeft{background-color: black;}
+  .theMenu{background-color: black;color: white;}
+  .theHeader>p{font-size: 1.3rem;}
+  .theFooterLeft{background-color: black;color: white;}
+  .grid-container{
+    display: grid;
+    grid-template-areas:
+    'header-left header header-right'
+    'menu menu menu'
+    'main main main'
+    'footer-left footer footer-right'
+  }
+  .theMenu a:link{
+    color: white;
+  }/*link bianchi su nero*/
+  .theMenu a:visited{
+    color:white;
+  }/*anche se visitati ritornano bianchi*/
+  .theMenu a:hover{
+    color: black;
+    background-color: white;
+  }/*Con il mouse su un link vengono invertiti i colori*/
+  .theMenu a:active{
+    color:black;
+    background-color:#70AE6E;
+  }
+  h2{font-size: 1.1rem;}
+  .theMain>p{font-size: 1rem;}
+}
+@media only screen and (max-width:480px) {
+  .theHeaderLeft{background-color: black;}
+  .theMenu{background-color: black;color: white;}
+  .theHeader>p{font-size: 1.3rem;}
+  .theFooterLeft{background-color: black;color: white;}
+  .grid-container{
+    display: grid;
+    grid-template-areas:
+    'header-left header-right'
     'header header'
+    /*'header-right'*/
     'menu menu'
     'main main'
-    'footer-1 footer-3'
+    'footer footer'
+    'footer-left footer-right'
+    /*'footer-right'*/
   }
+  .theMenu a:link{
+    color: white;
+  }/*link bianchi su nero*/
+  .theMenu a:visited{
+    color:white;
+  }/*anche se visitati ritornano bianchi*/
+  .theMenu a:hover{
+    color: black;
+    background-color: white;
+  }/*Con il mouse su un link vengono invertiti i colori*/
+  .theMenu a:active{
+    color:black;
+    background-color:#70AE6E;
+  }
+  h2{font-size: 1.1rem;}
+  .theMain>p{font-size: 1rem;}
 }

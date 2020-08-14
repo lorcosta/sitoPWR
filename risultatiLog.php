@@ -19,14 +19,14 @@
   }
   require_once "repetitiveScripts.php";//require per includere il file e scatenare eccezione fatale nel caso non venga incluso, once controlla che venga incluso una sola volta
  ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//IT"
-  “http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML >
 <html lang='it'>
   <head>
     <?php intestazioni('RISULTATI LOG') ?>
     <link rel="prev" href="log.php">
   </head>
   <body>
+    <?php avvisoJS(); ?>
     <div class="grid-container">
       <div class="theHeaderLeft">
         <?php myHeaderLeft(); ?>
@@ -122,7 +122,7 @@
                 <caption>Risultati delle condizioni di ricerca selezionate</caption>
                 <tr><th>Ordinante</th><th>Ricevente</th><th>Importo</th><th>Data</th></tr>';
               while(mysqli_stmt_fetch($stmt)){
-                echo '<tr><td>'.$src.'</td><td>'.$dst.'</td><td>'.$importo.'</td><td>'.$date.'</td></tr>';
+                echo '<tr><td>'.$src.'</td><td>'.$dst.'</td><td>'.number_format(($importo/100), 2, ',', '').' &euro;</td><td>'.$date.'</td></tr>';
               }
               echo '</table>';
               //rilascio la memoria associata al result set

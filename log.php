@@ -19,8 +19,7 @@
   }
   require_once "repetitiveScripts.php";//require per includere il file e scatenare eccezione fatale nel caso non venga incluso, once controlla che venga incluso una sola volta
  ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//IT"
-  “http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML >
 <html lang='it'>
   <head>
     <?php intestazioni('LOG') ?>
@@ -28,6 +27,7 @@
     <link rel="next" href="risultatiLog.php">
   </head>
   <body>
+    <?php avvisoJS(); ?>
     <div class="grid-container">
       <div class="theHeaderLeft">
         <?php myHeaderLeft(); ?>
@@ -50,7 +50,7 @@
             }
           }else{
             //utente loggato, form per effettuare scelta
-            echo '<form name="formRicerca" action="risultatiLog.php" method="GET">
+            echo '<form name="formRicerca" action="risultatiLog.php" method="POST">
               <div class="numberWrapper">
               <label for="posizione">Seleziona quali pagamenti vuoi visualizzare: </label>
               <select id="posizione" name="posizione">
