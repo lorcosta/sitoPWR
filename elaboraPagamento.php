@@ -66,7 +66,7 @@
             $importo=$_REQUEST["importo"];
             $_SESSION["importo"]=$importo;
             $regex="/^\d{1,}((,|.)\d{1,2})?$/";
-            if(!preg_match($regex,$importo)){
+            if(!preg_match($regex,$importo) && $_SESSION["error"]==false){
               echo '<p class="err">ATTENZIONE! Inserire un numero intero o con al più 2 cifre decimali separate da una virgola.</p>';
               echo '<p class="err"><a href="paga.php">Torna</a> alla pagina di pagamento.</p>';
               $_SESSION["error"]=true;
@@ -85,7 +85,7 @@
                 mysqli_stmt_bind_param($stmt,"s",$destinatario);
                 mysqli_stmt_execute($stmt);
                 $numRighe=mysqli_num_rows(mysqli_stmt_get_result($stmt));
-                if($numRighe==0){
+                if($numRighe==0 && $_SESSION["error"]==false){
                   echo '<p class="err">ATTENZIONE! Hai appena selezionato un destinatario che non è presente nell\'elenco!</p>';
                   echo '<p class="err"><a href="paga.php">Torna</a> alla pagina di pagamento e seleziona un destinatario disponibile.</p>';
                   $_SESSION["error"]=true;
@@ -105,7 +105,9 @@
             //se sono arrivato qui i due input sono stati inseriti e sono corretti
             //eseguo il pagamento vero e proprio
             require_once "eseguiPagamento.php";
-            eseguiPagamento($mittente,$destinatario,$importo);
+            if(!$_SESSION["error"]){
+              eseguiPagamento($mittente,$destinatario,$importo);
+            }
             if(!$_SESSION["error"]){//non sono avvenuti errori perciò posso reindirizzare alla pagina confermaPagamento.php che da le info riassuntive
               echo '<script>window.location.href="confermaPagamento.php";</script>';
             }

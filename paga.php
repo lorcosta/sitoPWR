@@ -122,7 +122,7 @@
                   echo '<tr><td><input type="radio" name="destinatario" value="'.$row["nick"].'"></td><td>'.$row["nome"].'</td></tr>';
                 }
                 echo '</table>';
-                echo '<div class="numberWrapper"><label for="importo">Inserisci la quantità di denaro che vuoi trasferire: </label><input type="number" name="importo" id="importo" step="0.01" min="0.01" max="'.$_SESSION["saldo"].'"> <label for="importo">&euro;</label></div>';
+                echo '<div class="numberWrapper"><label for="importo">Inserisci la quantità di denaro che vuoi trasferire: </label><input type="number" name="importo" id="importo" step="0.01" min="0.01" max="'.$_SESSION["saldo"].'" onchange="checkPayment(\'formPagamento\',\'importo\')"> <label for="importo">&euro;</label></div>';
                 echo '<div class="numberWrapper"><div class="bottoni"><input type="submit" name="paga" id="paga" value="PROCEDI" > <input type="reset" name="reset" value="PULISCI"></div></div>';
                 echo '</form>';
               }else{

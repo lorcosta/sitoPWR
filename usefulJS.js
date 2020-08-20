@@ -27,9 +27,10 @@ function checkPayment(form,idNumber){
     window.alert("ATTENZIONE! Nessun valore inserito nel campo di pagamento.");
     window.location.href="paga.php";
   }
-  regexp=/^\d{1,}((,)?\d{1,2})?$/;
-  if(!regexp.test(idNumber.value)){
-    window.alert("ATTENZIONE! Inserire un numero intero o con al più 2 cifre decimali separate da una virgola o un punto.");
-    window.location.href="paga.php";
+  var regexp=/^\d{1,}((\,)?\d{1,2})?$/;
+  var importo=document.getElementById(idNumber).value;
+  importo=importo.replace(".",",")
+  if(!regexp.test(importo)){
+    window.alert("ATTENZIONE! Inserire un numero intero o con al più 2 cifre decimali separate da una virgola.");
   }
 }

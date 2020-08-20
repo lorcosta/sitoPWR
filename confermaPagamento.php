@@ -48,7 +48,7 @@
         <?php
         echo '<h2 class="succ">Pagamento avvenuto con successo.</h2>';
         echo '<p>Il pagamento è stato effettuato da <i>'.$_SESSION["user"].'</i> ed è stato ricevuto da <i>'.$_SESSION["destinatario"].'</i>.</p>';
-        echo '<p>L\'importo del pagamento &egrave stato di <i>'.$_SESSION["importo"].'</i> &euro; ed &egrave stato registrato in data <i>'.$_SESSION["data"].'</i>.</p>';
+        echo '<p>L\'importo del pagamento &egrave stato di <i>'.number_format($_SESSION["importo"], 2, ',', '').'</i> &euro; ed &egrave stato registrato in data <i>'.$_SESSION["data"].'</i>.</p>';
          ?>
       </div>
       <div class="theFooterLeft">
